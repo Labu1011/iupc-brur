@@ -1,0 +1,74 @@
+.typingContainer {
+  font-family: "Courier New", Courier, monospace; /* Use a monospace font for effect */
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #7c3aed; /* Cursor style */
+  animation: cursorBlink 0.75s step-end infinite;
+}
+
+.typingText {
+  display: inline-block;
+  animation:
+    typing 2s steps(30, end) infinite,
+    blink 0.75s step-end infinite;
+  will-change: width;
+}
+
+@-webkit-keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7c3aed;
+  }
+}
+
+@-webkit-keyframes cursorBlink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7c3aed;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7c3aed;
+  }
+}
+
+@keyframes cursorBlink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7c3aed;
+  }
+}
