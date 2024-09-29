@@ -1,17 +1,17 @@
-import { cn } from "@/app/lib/cn";
-import { fregeist, geist, syne } from "@/app/lib/font";
+import { cn } from "@/app/lib/cn"
+import { fregeist, geist, syne } from "@/app/lib/font"
 import {
   ArrowRightIcon,
   ArrowUpIcon,
   ChevronUpIcon,
   DotIcon,
   ExternalLinkIcon,
-} from "@radix-ui/react-icons";
-import Image from "next/image";
-import React from "react";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { useAppContext } from "@/context";
+} from "@radix-ui/react-icons"
+import Image from "next/image"
+import React from "react"
+import { Button } from "../ui/button"
+import Link from "next/link"
+import { useAppContext } from "@/context"
 
 const Footer = () => {
   return (
@@ -23,7 +23,7 @@ const Footer = () => {
         <p
           className={cn(
             fregeist.className,
-            "text-[29px] tracking-[1px] bg-gradient-to-r from-gray-50 to-gray-600 bg-clip-text text-transparent font-medium",
+            "text-[29px] tracking-[1px] bg-gradient-to-r from-gray-50 to-gray-600 bg-clip-text text-transparent font-medium"
           )}
         >
           ulticone
@@ -54,13 +54,12 @@ const Footer = () => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
 
 const Leftbar = () => {
-  const { setIsOpen } = useAppContext();
   return (
     <div className="space-y-7 w-full">
       <p className="text-3xl md:text-6xl lg:text-7xl bg-gradient-to-r font-medium from-gray-50 to-gray-600 bg-clip-text text-transparent">
@@ -71,7 +70,7 @@ const Leftbar = () => {
         Feel free to reach our if you want to collaborate with us,
         <br /> or simply have a chat
       </p>
-      <Button onClick={() => setIsOpen(true)} size={"lg"} className="group">
+      <Button size={"lg"} className="group">
         Become a client
         <ArrowRightIcon className="group-hover:translate-x-2 transition-transform duration-75 h-5 w-5" />
       </Button>
@@ -82,8 +81,8 @@ const Leftbar = () => {
       </p>
       <div className="h-4"></div>
     </div>
-  );
-};
+  )
+}
 
 const Contacts = () => {
   return (
@@ -98,8 +97,8 @@ const Contacts = () => {
         <b>+8801738556332</b>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Follow_us = () => {
   return (
@@ -118,8 +117,8 @@ const Follow_us = () => {
         Fiverr <ExternalLinkIcon />
       </Link>
     </div>
-  );
-};
+  )
+}
 
 const Services = () => {
   return (
@@ -147,5 +146,5 @@ const Services = () => {
         Reviews
       </Link>
     </div>
-  );
-};
+  )
+}

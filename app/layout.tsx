@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { fregeist, geist } from "./lib/font";
-import CustomCursor from "@/components/ui/customCursor";
-import { AppWrapper } from "@/context";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { fregeist, geist } from "./lib/font"
+import CustomCursor from "@/components/ui/customCursor"
+import { AppWrapper } from "@/context"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Multicone",
-  description: "A web and app development studio",
-};
+  title: "BRUR CSE Fest IUPC",
+  description: "",
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -23,5 +23,5 @@ export default function RootLayout({
         <body className={geist.className}>{children}</body>
       </AppWrapper>
     </html>
-  );
+  )
 }
