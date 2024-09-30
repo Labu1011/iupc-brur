@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { cn } from "@/app/lib/cn"
-import { fregeist, geist, inter, syne } from "@/app/lib/font"
-import React from "react"
-import Image from "next/image"
-import Countdown from "react-countdown"
-import { Card, CardHeader } from "../ui/card"
-import { service_cards, ServiceCardProps } from "@/app/lib/data"
-import SectionHeader from "./header"
-import { Reveal } from "../ui/Anim"
-import CountdownSection from "./countdown"
+import { cn } from "@/app/lib/cn";
+import { fregeist, geist, inter, syne } from "@/app/lib/font";
+import React from "react";
+import Image from "next/image";
+import Countdown from "react-countdown";
+import { Card, CardHeader } from "../ui/card";
+import { service_cards, ServiceCardProps } from "@/app/lib/data";
+import SectionHeader from "./header";
+import { Reveal } from "../ui/Anim";
+import CountdownSection from "./countdown";
 
 const PrizePool = () => {
   return (
@@ -17,10 +17,9 @@ const PrizePool = () => {
       id="services"
       className={cn(
         fregeist.className,
-        "relative container space-y-3 w-full text-black"
+        "relative container space-y-3 w-full text-black",
       )}
     >
-      <CountdownSection />
       <div className="w-full h-80"></div>
       <SectionHeader
         title={
@@ -97,10 +96,10 @@ const PrizePool = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PrizePool
+export default PrizePool;
 
 const Service_card = ({ title, desc, url }: ServiceCardProps) => {
   return (
@@ -108,7 +107,7 @@ const Service_card = ({ title, desc, url }: ServiceCardProps) => {
       <div
         className={cn(
           "bg-violet-30 firefox:opacity-40",
-          "z-0 blur-[110px] absolute left-1/2 -translate-x-1/2 top-[40%] h-24 w-24"
+          "z-0 blur-[110px] absolute left-1/2 -translate-x-1/2 top-[40%] h-24 w-24",
         )}
       ></div>
       <div className="relative z-10 p-5 lg:p-10 space-y-4">
@@ -133,5 +132,5 @@ const Service_card = ({ title, desc, url }: ServiceCardProps) => {
         </div>
       </Reveal>
     </Card>
-  )
-}
+  );
+};
