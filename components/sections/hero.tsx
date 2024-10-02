@@ -7,6 +7,7 @@ import { TypeAnimation } from "react-type-animation"
 import { ArrowDownIcon, DotIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Toaster } from "@/components/ui/toaster"
 import { useAppContext } from "@/context"
 
 const Hero = () => {
@@ -20,10 +21,10 @@ const Hero = () => {
         <p
           className={cn(
             geist.className,
-            "text-center leading-[100%] bg-gradient-to-br from-gray-50 to-gray-400 bg-clip-text text-transparent  text-[39px] md:text-[60px] lg:text-[80px]  font-bold"
+            "text-center leading-[100%] bg-gradient-to-br from-gray-50 to-gray-400 bg-clip-text text-transparent  text-[39px] md:text-[60px] lg:text-[70px]  font-bold"
           )}
         >
-          Inter University <br />
+          Rangpur Divisional Collegiate <br />
           Programming Contest
         </p>
         <p className="text-lg md:text-2xl text-center text-gray-400 font-regular">

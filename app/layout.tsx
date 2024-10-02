@@ -4,6 +4,7 @@ import "./globals.css"
 import { fregeist, geist } from "./lib/font"
 import CustomCursor from "@/components/ui/customCursor"
 import { AppWrapper } from "@/context"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <AppWrapper>
         <body className={geist.className}>{children}</body>
+        <Toaster />
       </AppWrapper>
     </html>
   )
