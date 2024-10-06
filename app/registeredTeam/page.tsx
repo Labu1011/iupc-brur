@@ -29,15 +29,19 @@ interface Team {
 }
 
 async function RegisteredTeamPage() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-registration`,
-    {
-      cache: "no-cache",
-    }
-  )
+  let res
+  let data
 
-  const data = await res.json()
-  console.log(data)
+  try {
+    res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-registration`,
+      {
+        cache: "no-cache",
+      }
+    )
+
+    data = await res.json()
+  } catch (e) {}
 
   return (
     <div className="relative w-full py-24 overflow-hidden min-h-screen bg-black text-white items-center justify-between">
@@ -63,7 +67,7 @@ async function RegisteredTeamPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((team: Team) => (
+            {data?.map((team: Team) => (
               <TableRow key={team._id}>
                 <TableCell className="font-medium">{team.teamName}</TableCell>
                 <TableCell>{team.institutionName}</TableCell>

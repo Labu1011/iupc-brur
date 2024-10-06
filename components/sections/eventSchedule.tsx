@@ -46,7 +46,7 @@ const EventSchedule = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((team: Team) => (
+            {/* {data.map((team: Team) => (
               <TableRow key={team._id}>
                 <TableCell className="font-medium">{team.teamName}</TableCell>
                 <TableCell>{team.institutionName}</TableCell>
@@ -60,7 +60,7 @@ const EventSchedule = () => {
                   )}
                 </TableCell>
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </Table>
       </div>

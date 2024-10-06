@@ -232,8 +232,9 @@ const RegisterForm = () => {
                 <CardTitle className="text-lg">Basic Information</CardTitle>
                 <CardTitle className="flex-col items-start gap-2 text-sm">
                   <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
-                    <InfoCircledIcon className="w-4 h-4" /> Provide your team's
-                    basic information
+                    <InfoCircledIcon className="w-4 h-4" />{" "}
+                    {`Provide your team's
+                    basic information`}
                   </div>
                 </CardTitle>
                 <div className="h-1" />
@@ -311,7 +312,7 @@ const RegisterForm = () => {
                         <div className="grid grid-cols-2 gap-4">
                           <FormField
                             control={form.control}
-                            name={`members.${index}.name`}
+                            name={`members.${index}.name` as any}
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="">Name</FormLabel>
@@ -329,7 +330,7 @@ const RegisterForm = () => {
                           />
                           <FormField
                             control={form.control}
-                            name={`members.${index}.email`}
+                            name={`members.${index}.email` as any}
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="">Email</FormLabel>
@@ -347,7 +348,7 @@ const RegisterForm = () => {
                           />
                           <FormField
                             control={form.control}
-                            name={`members.${index}.phoneNumber`}
+                            name={`members.${index}.phoneNumber` as any}
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="">Phone Number</FormLabel>
@@ -365,7 +366,7 @@ const RegisterForm = () => {
                           />
                           <FormField
                             control={form.control}
-                            name={`members.${index}.tShirtSize`}
+                            name={`members.${index}.tShirtSize` as any}
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="">T-Shirt Size</FormLabel>
