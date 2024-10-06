@@ -10,9 +10,13 @@ import { useAppContext } from "@/context"
 import Menu from "./menu"
 
 const Nav = () => {
+  const handleContactClick = () => {
+    window.location.href =
+      "mailto:example@email.com?subject=Contact%20Us&body=Hello!"
+  }
   return (
     <div className="container py-7 relative z-[1000] flex items-center justify-between w-full">
-      <Image src="/iupc_logo.svg" width={80} height={0} alt="" />
+      <Image src="/mongram.png" width={100} height={0} alt="" />
       <div
         className={cn(
           geist.className,
@@ -22,11 +26,14 @@ const Nav = () => {
         <Link href="/">Home</Link>
         <Link href="#services">Prizes & Perks</Link>
         <Link href="#showcases">Rules & Guides</Link>
-        <Link href="#aboutus">About us</Link>
+        <Link href="/registeredTeam">Registered Teams</Link>
       </div>
       <div className="flex items-center justify-center gap-3">
-        <Button className="flex group gap-x-2 text-md">
-          <span className="group-hover:rotate-180 duration-300 text-gray-500">
+        <Button
+          className="flex group gap-x-2 text-md"
+          onClick={handleContactClick}
+        >
+          <span className="group-hover:rotate-90 duration-300 text-gray-500">
             📞
           </span>
           Contact Us

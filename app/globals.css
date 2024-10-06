@@ -116,9 +116,9 @@ b.highlighted::after {
   }
 }
 @layer components {
-  /*.container {*/
-  /*  @apply p-4 md:p-8 lg:p-14 xl:p-14 w-full max-w-full;*/
-  /*}*/
+  .container {
+    @apply p-4 md:p-8 lg:p-14 xl:p-14 w-full max-w-full;
+  }
 
   .vignette-effect {
     position: relative;

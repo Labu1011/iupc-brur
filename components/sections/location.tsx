@@ -1,6 +1,6 @@
 // components/GoogleMapEmbed.js
-import React from "react";
-import SectionHeader from "./header";
+import React from "react"
+import SectionHeader from "./header"
 
 const GoogleMapEmbed = () => {
   return (
@@ -30,7 +30,7 @@ const GoogleMapEmbed = () => {
         loading="lazy"
       ></iframe>
     </div>
-  );
-};
+  )
+}
 
-export default GoogleMapEmbed;
+export default GoogleMapEmbed

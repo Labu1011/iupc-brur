@@ -31,12 +31,15 @@ const Hero = () => {
           Organized by Department of CSE, BRUR
         </p>
         <div className="h-0"></div>
-        <Button
-          size={"lg"}
-          className="mx-auto w-fit text-md h-12 px-12 flex group gap-x-2"
-        >
-          Register your team
-        </Button>
+
+        <a href="#register">
+          <Button
+            size={"lg"}
+            className="mx-auto w-fit text-md h-12 px-12 flex group gap-x-2"
+          >
+            Register your team
+          </Button>
+        </a>
       </div>
 
       {/* <Link */}

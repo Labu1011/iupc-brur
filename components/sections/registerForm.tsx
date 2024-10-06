@@ -30,6 +30,7 @@ import { Separator } from "../ui/separator"
 
 // Zod Schema for TShirtSize Enum
 const TShirtSize = z.enum(["S", "M", "L", "XL", "XXL"])
+const paymentMethods = z.enum(["Bkash", "Nagad", "Rocket"])
 
 const phoneNumberValidation = z
   .string()
@@ -43,12 +44,7 @@ const formSchema = z.object({
     .string()
     .min(4, { message: "Team Name must be at least 4 characters long." }),
   institutionName: z.string().nonempty("Institution name is required."),
-  coach: z.object({
-    name: z.string().nonempty("Coach name is required"),
-    email: z.string().email("Invalid email"),
-    phoneNumber: phoneNumberValidation,
-    tShirtSize: TShirtSize,
-  }),
+
   members: z.tuple([
     z.object({
       name: z.string().nonempty("Member name is required"),
@@ -69,6 +65,10 @@ const formSchema = z.object({
       tShirtSize: TShirtSize,
     }),
   ]),
+  paymentMethod: paymentMethods,
+  trxId: z
+    .string()
+    .min(10, { message: "Transaction ID must be at least 10 chars long" }),
 })
 
 // ----
@@ -80,17 +80,13 @@ const RegisterForm = () => {
     defaultValues: {
       teamName: "",
       institutionName: "",
-      coach: {
-        name: "",
-        email: "",
-        phoneNumber: "",
-        tShirtSize: "M",
-      },
       members: [
         { name: "", email: "", phoneNumber: "", tShirtSize: "M" },
         { name: "", email: "", phoneNumber: "", tShirtSize: "M" },
         { name: "", email: "", phoneNumber: "", tShirtSize: "M" },
       ],
+      paymentMethod: "Bkash",
+      trxId: "",
     },
   })
 
@@ -151,6 +147,34 @@ const RegisterForm = () => {
         })
         console.log("Team created: ", result)
 
+        const res = await fetch("/api/sendmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: process.env.NEXT_PUBLIC_EMAIL_USER,
+            to: data.members[0].email,
+            subject: "Welcome to RDCPC 2024",
+            text: "Thank you for registering for RDCPC 2024!",
+            html: `<h1>Congratulations!</h1>
+        <p>Dear Team Leader,</p>
+        <p>Your team "<strong>${data.teamName}</strong>" has successfully registered for the IUPC event.</p>
+        <p>We're excited to have you with us! Best of luck to your team!</p>
+        <p>Best regards,<br/>IUPC Team</p>`,
+          }),
+        })
+
+        if (res.ok) {
+          toast({
+            title: "Check your mail inbox",
+            description: `An email has been sent to team leader's mail.`,
+          })
+        }
+
+        const d = await res.json()
+        console.log(d)
+
         // Reset form fields
         form.reset()
       } else {
@@ -178,10 +202,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <div
-      id="aboutus"
-      className={cn(geist.className, "container space-y-3 w-full")}
-    >
+    <div id="register" className={cn(geist.className, "space-y-3 w-full")}>
       <div className="w-full h-44"></div>
       <div className="w-full h-12"></div>
       <SectionHeader
@@ -194,7 +215,7 @@ const RegisterForm = () => {
         }
         subtitle={
           <>
-            Ready to compete? <br /> Register now and prepare for an
+            Ready to compete? Register now and <br /> prepare for an
             unforgettable experience!
           </>
         }
@@ -205,7 +226,7 @@ const RegisterForm = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
-              className="max-w-[768px] bg-black mx-auto space-y-14  border border-gray-600/30 rounded-3xl shadow-3xl p-14"
+              className="max-w-[768px] bg-black mx-auto space-y-14  border border-gray-600/30 rounded-3xl shadow-3xl p-7 lg:p-14"
             >
               <div className="space-y-2">
                 <CardTitle className="text-lg">Basic Information</CardTitle>
@@ -255,101 +276,6 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-
-              {/* Coach Information */}
-              <div className="space-y-2">
-                <CardTitle className="text-lg">Coach Information</CardTitle>
-                <CardTitle className="flex-col items-start gap-2 text-sm">
-                  <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
-                    <InfoCircledIcon className="w-4 h-4" /> Provide your coach
-                    information
-                  </div>
-                </CardTitle>
-                <div className="h-1" />
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="coach.name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="">Coach Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Enter coach name"
-                            {...field}
-                            className=""
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="coach.email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="">Coach Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Enter coach email"
-                            {...field}
-                            className=""
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="coach.phoneNumber"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="">Coach Phone Number</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Enter coach phone number"
-                            {...field}
-                            className=""
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="coach.tShirtSize"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="">Coach T-Shirt Size</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select size" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="S">S</SelectItem>
-                              <SelectItem value="M">M</SelectItem>
-                              <SelectItem value="L">L</SelectItem>
-                              <SelectItem value="XL">XL</SelectItem>
-                              <SelectItem value="XXL">XXL</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
               </div>
 
               {/* Members Information */}
@@ -469,6 +395,64 @@ const RegisterForm = () => {
                     </>
                   ))}
                 </div>
+              </div>
+
+              {/* Payment Verification */}
+              <div className="space-y-2">
+                <CardTitle className="text-lg">Payment Verification</CardTitle>
+                <CardTitle className="flex-col items-start gap-2 text-sm">
+                  <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
+                    <InfoCircledIcon className="w-4 h-4" /> Provide your
+                    transaction
+                  </div>
+                </CardTitle>
+                <div className="h-1" />
+                {/* Team Name */}
+                <FormField
+                  control={form.control}
+                  name="paymentMethod"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="">Payment method</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select payment method" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem defaultChecked value="Bkash">
+                              Bkash
+                            </SelectItem>
+                            <SelectItem value="Nagad">Nagad</SelectItem>
+                            <SelectItem value="Rocket">Rocket</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="trxId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Transaction ID</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Enter transaction ID"
+                          {...field}
+                          className=""
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               {/* Submit Button */}

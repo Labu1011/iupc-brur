@@ -1,10 +1,11 @@
-import CountdownSection from "@/components/sections/countdown";
-import Hero from "@/components/sections/hero";
-import GoogleMapEmbed from "@/components/sections/location";
-import Nav from "@/components/sections/nav";
-import Perks from "@/components/sections/perks";
-import PrizePool from "@/components/sections/prizepool";
-import RegisterForm from "@/components/sections/registerForm";
+import CountdownSection from "@/components/sections/countdown"
+import EventSchedule from "@/components/sections/eventSchedule"
+import Hero from "@/components/sections/hero"
+import GoogleMapEmbed from "@/components/sections/location"
+import Nav from "@/components/sections/nav"
+import Perks from "@/components/sections/perks"
+import PrizePool from "@/components/sections/prizepool"
+import RegisterForm from "@/components/sections/registerForm"
 
 export default function Home() {
   return (
@@ -22,11 +23,12 @@ export default function Home() {
       <Nav />
       <Hero />
       <CountdownSection />
+      <EventSchedule />
       <PrizePool />
       <Perks />
       <RegisterForm />
       <GoogleMapEmbed />
       {/* <Footer /> */}
     </main>
-  );
+  )
 }
