@@ -63,7 +63,7 @@ async function RegisteredTeamPage() {
             <TableRow>
               <TableHead className="">Team Name</TableHead>
               <TableHead>Institution</TableHead>
-              <TableHead className="text-right">Payment Status</TableHead>
+              <TableHead className="text-right">Registration Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -73,7 +73,9 @@ async function RegisteredTeamPage() {
                 <TableCell>{team.institutionName}</TableCell>
                 <TableCell className="text-right">
                   {team.paymentStatus ? (
-                    <p className="text-sm font-medium text-green-500">Paid</p>
+                    <p className="text-sm font-medium text-green-500">
+                      Completed
+                    </p>
                   ) : (
                     <p className="text-sm font-medium text-amber-500">
                       Pending

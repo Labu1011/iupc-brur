@@ -24,8 +24,8 @@ const Nav = () => {
         )}
       >
         <Link href="/">Home</Link>
+        <Link href="#showcases">Event Schedule</Link>
         <Link href="#services">Prizes & Perks</Link>
-        <Link href="#showcases">Rules & Guides</Link>
         <Link href="/registeredTeam">Registered Teams</Link>
       </div>
       <div className="flex items-center justify-center gap-3">

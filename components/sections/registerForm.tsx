@@ -85,8 +85,6 @@ const RegisterForm = () => {
         { name: "", email: "", phoneNumber: "", tShirtSize: "M" },
         { name: "", email: "", phoneNumber: "", tShirtSize: "M" },
       ],
-      paymentMethod: "Bkash",
-      trxId: "",
     },
   })
 
@@ -399,62 +397,6 @@ const RegisterForm = () => {
               </div>
 
               {/* Payment Verification */}
-              <div className="space-y-2">
-                <CardTitle className="text-lg">Payment Verification</CardTitle>
-                <CardTitle className="flex-col items-start gap-2 text-sm">
-                  <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
-                    <InfoCircledIcon className="w-4 h-4" /> Provide your
-                    transaction
-                  </div>
-                </CardTitle>
-                <div className="h-1" />
-                {/* Team Name */}
-                <FormField
-                  control={form.control}
-                  name="paymentMethod"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="">Payment method</FormLabel>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select payment method" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem defaultChecked value="Bkash">
-                              Bkash
-                            </SelectItem>
-                            <SelectItem value="Nagad">Nagad</SelectItem>
-                            <SelectItem value="Rocket">Rocket</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="trxId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Transaction ID</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="Enter transaction ID"
-                          {...field}
-                          className=""
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
 
               {/* Submit Button */}
               <Button type="submit" className="max-w-36">

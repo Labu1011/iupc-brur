@@ -1,5 +1,5 @@
 import { cn } from "@/app/lib/cn"
-import { fregeist } from "@/app/lib/font"
+import { fregeist, geist } from "@/app/lib/font"
 import React from "react"
 import SectionHeader from "./header"
 import {
@@ -18,13 +18,27 @@ interface Schedule {
   dateTime: string
 }
 
+const schedule: Schedule[] = [
+  {
+    event_: "Final register start",
+    location: "online",
+    dateTime: "8 Oct, 2024",
+  },
+  {
+    event_: "Final register end",
+    location: "online",
+    dateTime: "12 Oct, 2024",
+  },
+  { event_: "Mock Contest", location: "BRUR", dateTime: "18 Oct, 2024" },
+  { event_: "Main Contest", location: "BRUR", dateTime: "19 Oct, 2024" },
+]
+
 const EventSchedule = () => {
   return (
     <div
-      id="services"
       className={cn(
         fregeist.className,
-        "relative container space-y-3 w-full text-black"
+        "relative container space-y-3 bg-black text-white w-full"
       )}
     >
       <div className="w-full h-44"></div>
@@ -33,34 +47,23 @@ const EventSchedule = () => {
         subtitle={<>Check out important dates and times of the RDCPC event.</>}
       />
 
-      <div className="max-w-[1024px] px-4 mx-auto">
+      <div className={cn(geist.className, "max-w-[1024px] px-4 mx-auto")}>
         <Table className="mt-16">
-          <TableCaption>
-            A list of teams who are registered in this event.
-          </TableCaption>
-          <TableHeader>
+          <TableHeader className="bg-zinc-900 rounded-xl">
             <TableRow>
-              <TableHead className="">Team Name</TableHead>
-              <TableHead>Institution</TableHead>
-              <TableHead className="text-right">Payment Status</TableHead>
+              <TableHead className="">Event</TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead className="text-right">Date & Time</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {/* {data.map((team: Team) => (
-              <TableRow key={team._id}>
-                <TableCell className="font-medium">{team.teamName}</TableCell>
-                <TableCell>{team.institutionName}</TableCell>
-                <TableCell className="text-right">
-                  {team.paymentStatus ? (
-                    <p className="text-sm font-medium text-green-500">Paid</p>
-                  ) : (
-                    <p className="text-sm font-medium text-amber-500">
-                      Pending
-                    </p>
-                  )}
-                </TableCell>
+            {schedule.map((item: Schedule) => (
+              <TableRow key={item.event_}>
+                <TableCell className="font-medium">{item.event_}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell className="text-right">{item.dateTime}</TableCell>
               </TableRow>
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       </div>
