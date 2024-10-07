@@ -36,7 +36,7 @@ const paymentMethods = z.enum(["Bkash", "Nagad", "Rocket"])
 
 const phoneNumberValidation = z
   .string()
-  .min(10, { message: "Phone number must be at least 10 digits long." })
+  .length(11, { message: "Phone number must be 11 digits long." })
   .regex(/^[0-9]+$/, { message: "Phone number must contain only numbers." })
   .nonempty("Phone number is required")
 
@@ -195,7 +195,7 @@ const RegisterForm = () => {
       />
       <div className="h-10"></div>
       <Card className="relative text-white border-none">
-        <CardContent className="relative z-10">
+        <CardContent className="relative z-10 p-0">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
@@ -282,7 +282,7 @@ const RegisterForm = () => {
                           </div>
                         </CardTitle>
                         <div className="h-1"></div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <FormField
                             control={form.control}
                             name={`members.${index}.name` as any}
@@ -374,7 +374,7 @@ const RegisterForm = () => {
               {/* Payment Verification */}
 
               {/* Submit Button */}
-              <Button type="submit" className="max-w-36">
+              <Button type="submit" size="lg" className="max-w-36">
                 Submit
               </Button>
             </form>

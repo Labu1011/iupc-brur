@@ -13,7 +13,7 @@ import { useAppContext } from "@/context"
 const Hero = () => {
   return (
     <div id="/" className="relative bg-[rgba(18, 20, 21, 0)] container w-full">
-      <div className="flex flex-col justfy-center space-y-6 relative z-[1000]">
+      <div className="flex flex-col justfy-center space-y-3 lg:space-y-6 relative z-[1000]">
         <div className="h-10 lg:h-16"></div>
         <div className="flex text-center gap-x-2 text-gray-400 items-center mx-auto w-fit bg-light bg-gray-400/10 px-6 py-2 rounded-full border-gray-700">
           Compete <DotIcon /> Code <DotIcon /> Conquer

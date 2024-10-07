@@ -20,13 +20,13 @@ interface Schedule {
 
 const schedule: Schedule[] = [
   {
-    event_: "Final register start",
-    location: "online",
+    event_: "Final Register Start",
+    location: "Online",
     dateTime: "8 Oct, 2024",
   },
   {
-    event_: "Final register end",
-    location: "online",
+    event_: "Final Register End",
+    location: "Online",
     dateTime: "12 Oct, 2024",
   },
   { event_: "Mock Contest", location: "BRUR", dateTime: "18 Oct, 2024" },
@@ -43,7 +43,12 @@ const EventSchedule = () => {
     >
       <div className="w-full h-44"></div>
       <SectionHeader
-        title={<>Event Schedule</>}
+        title={
+          <>
+            Event<span className="text-gray-400/50">.</span>Schedule
+            <span className="text-gray-400/50">()</span>
+          </>
+        }
         subtitle={<>Check out important dates and times of the RDCPC event.</>}
       />
 

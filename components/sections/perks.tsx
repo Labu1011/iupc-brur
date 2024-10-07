@@ -16,23 +16,24 @@ const Perks = () => {
           title="Participants' perks"
           subtitle={
             <>
-              As a token of appreciation for being part of the IUPC, <br />{" "}
-              every participant will enjoy a range of exclusive perks.
+              As a token of appreciation for being part of the IUPC,{" "}
+              <br className="hidden lg:block" /> every participant will enjoy a
+              range of exclusive perks.
             </>
           }
         />
       </div>
-      <div className="h-24"></div>
+      <div className="h-10 md:h-24"></div>
 
       <div className="w-full flex justify-center">
         <div className="flex flex-col lg:flex-row items-center gap-x-10 gap-y-6 rounded-2xl w-fit">
-          <div className="flex border border-zinc-600/30 rounded-2xl px-10 py-8 items-center gap-4">
+          <div className="flex border border-zinc-100/20 rounded-2xl px-6 py-4 md:px-10 md:py-8 items-center gap-4">
             <Image src={"/shirt.png"} height={0} width={110} alt="T-Shirt" />
             <p className="text-zinc-300 text-center text-md lg:text-xl">
               Official IUPC T-Shirt
             </p>
           </div>
-          <div className="flex border border-zinc-600/30 rounded-2xl px-10 py-8 items-center gap-4">
+          <div className="flex border border-zinc-100/20 rounded-2xl px-6 py-4 md:px-10 md:py-8 items-center gap-4">
             <Image
               src={"/school_satchel.png"}
               height={0}
@@ -43,7 +44,7 @@ const Perks = () => {
               Branded Backpack
             </p>
           </div>
-          <div className="flex border border-zinc-600/30 rounded-2xl px-10 py-8 items-center gap-4">
+          <div className="flex border border-zinc-100/20 rounded-2xl px-6 py-4 md:px-10 md:py-8 items-center gap-4">
             <Image src={"/ledger.png"} height={0} width={110} alt="Notebook" />
             <p className=" text-zinc-300 text-center text-md lg:text-xl">
               Pen and Notebook
@@ -61,7 +62,7 @@ const Perks = () => {
           *
         </span>
         And enjoy complimentary snacks during the IUPC event to keep you{" "}
-        <br></br>
+        <br className="hidden lg:block" />
         energized and focused throughout the competition!
       </p>
     </Fragment>

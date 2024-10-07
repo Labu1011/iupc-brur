@@ -14,7 +14,7 @@ const SectionHeader = ({
       <p
         className={clsx(
           fregeist.className,
-          "text-white text-[1.5rem] md:text-[2.5rem] lg:text-[2.8rem] leading-[100%] font-normal"
+          "text-white text-[1.8rem] md:text-[2.5rem] lg:text-[2.8rem] leading-[100%] font-normal"
         )}
       >
         {title}

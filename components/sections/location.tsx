@@ -4,8 +4,8 @@ import SectionHeader from "./header"
 
 const GoogleMapEmbed = () => {
   return (
-    <div className=" w-full space-y-20">
-      <div className="w-full h-44"></div>
+    <div className=" w-full space-y-12 lg:space-y-20">
+      <div className="w-full h-20 lg:h-44"></div>
 
       <SectionHeader
         title={
@@ -17,8 +17,9 @@ const GoogleMapEmbed = () => {
         }
         subtitle={
           <>
-            Easily find your way to the competition venue or <br /> join us
-            remotely with clear and simple location details.
+            Easily find your way to the competition venue or{" "}
+            <br className="hidden lg:block" /> join us remotely with clear and
+            simple location details.
           </>
         }
       />

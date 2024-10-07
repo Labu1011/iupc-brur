@@ -18,7 +18,14 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"
-import { CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { CheckboxIcon, InfoCircledIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -26,6 +33,7 @@ import * as z from "zod"
 import { useEffect, useState } from "react"
 import { toast } from "@/hooks/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Label } from "@/components/ui/label"
 
 type PaymentFormValues = {
   paymentMethod: string
@@ -55,7 +63,7 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
   const form = useForm<PaymentFormValues>({
     resolver: zodResolver(paymentFormSchema),
     defaultValues: {
-      paymentMethod: "",
+      paymentMethod: "Bkash",
       trxId: "",
     },
   })
@@ -194,76 +202,86 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                 Payment is being processed
               </h1>
               <p className="text-zinc-400 text-center mt-2">
-                We've received your transaction ID. Please wait while we verify
-                your payment.
+                We&apos;ve received your transaction ID. Please wait while we
+                verify your payment. <br /> We will notify you through a
+                confirmation email.
               </p>
             </>
           ) : (
             // Pending Status (No trxId)
             <>
               <SectionHeader title="Payment Verification" subtitle={<></>} />
-              <div className="max-w-md mx-auto p-6">
-                <p className="text-zinc-200 pb-8">Reference: {teamId}</p>
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4"
-                  >
-                    {/* Payment Method Selector */}
-                    <FormField
-                      control={form.control}
-                      name="paymentMethod"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Payment Method</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select payment method" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="Bkash">Bkash</SelectItem>
-                                <SelectItem value="Nagad">Nagad</SelectItem>
-                                <SelectItem value="Rocket">Rocket</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+              <div className="max-w-5xl mx-auto p-6 flex gap-12">
+                <div className="w-1/2">
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-4 max-w-md"
+                    >
+                      {/* Payment Method Selector */}
+                      <FormField
+                        control={form.control}
+                        name="paymentMethod"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Payment Method</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select payment method" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="Bkash">Bkash</SelectItem>
+                                  <SelectItem value="Nagad">Nagad</SelectItem>
+                                  <SelectItem value="Rocket">Rocket</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      {/* Transaction ID Input */}
+                      <FormField
+                        control={form.control}
+                        name="trxId"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Transaction ID</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="text"
+                                placeholder="Enter transaction ID"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <div>{form.getValues("paymentMethod")}</div>
+                      {/* Submit Button */}
+                      <Button type="submit">Submit</Button>
+                    </form>
+                  </Form>
+
+                  <p className="mt-4 text-zinc-500">or</p>
+                  <Link href="/" className="text-zinc-300 underline mt-2">
+                    Pay Later
+                  </Link>
+                </div>
+
+                <div className="w-1/2">
+                  <Card className="relative text-white border-gray-400/40">
+                    <QR_Info
+                      method={form.watch("paymentMethod")}
+                      teamId={teamId}
                     />
-
-                    {/* Transaction ID Input */}
-                    <FormField
-                      control={form.control}
-                      name="trxId"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Transaction ID</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="text"
-                              placeholder="Enter transaction ID"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {/* Submit Button */}
-                    <Button type="submit">Submit</Button>
-                  </form>
-                </Form>
-
-                <p className="mt-4 text-zinc-500">or</p>
-                <Link href="/" className="text-zinc-300 underline mt-2">
-                  Pay Later
-                </Link>
+                  </Card>
+                </div>
               </div>
             </>
           )}
@@ -274,3 +292,53 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
 }
 
 export default TeamPaymentPage
+
+const QR_Info = ({
+  method,
+  teamId,
+}: {
+  method: string
+  teamId: number | null
+}) => {
+  let backgroundImage = method === "Bkash" ? "/bkash.png" : "/rocket.png"
+  return (
+    <CardContent className="p-4 flex gap-4">
+      {method === "Bkash" || method === "Rocket" ? (
+        <div
+          className="h-44 w-44 rounded-lg shrink-0 mx-auto bg-cover"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        ></div>
+      ) : (
+        <div></div>
+      )}
+      <div className="h-44 flex flex-col justify-center gap-y-3 gap-x-2 leading-none text-lg text-white/70">
+        {method === "Bkash" || method === "Rocket" ? (
+          <>
+            <Label className="flex gap-x-2">
+              <InfoCircledIcon className="w-5 h-5" /> To pay with {method}, scan
+              the QR code
+            </Label>
+            <Label className="text-center">or</Label>
+          </>
+        ) : (
+          <div></div>
+        )}
+
+        <Label className="gap-x-2">
+          Send money to this phone number{" "}
+          <span className="text-white">01521539650</span>
+        </Label>
+        <Label className="gap-x-2">
+          Amount: <span className="text-white">3000 + 60 = 3060 Tk</span>{" "}
+          {"(with Cashout charge) "}
+        </Label>
+        <Label className="gap-x-2">
+          Use this reference while making payment:{" "}
+          <span className="text-white">{teamId}</span>{" "}
+          {"(this number is specific for your team!)"}
+        </Label>
+      </div>
+      <p></p>
+    </CardContent>
+  )
+}

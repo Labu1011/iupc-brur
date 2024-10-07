@@ -1,5 +1,6 @@
 import CountdownSection from "@/components/sections/countdown"
 import EventSchedule from "@/components/sections/eventSchedule"
+import Footer from "@/components/sections/footer"
 import Hero from "@/components/sections/hero"
 import GoogleMapEmbed from "@/components/sections/location"
 import Nav from "@/components/sections/nav"
@@ -28,7 +29,7 @@ export default function Home() {
       <Perks />
       <RegisterForm />
       <GoogleMapEmbed />
-      {/* <Footer /> */}
+      <Footer />
     </main>
   )
 }

@@ -33,9 +33,6 @@ const Nav = () => {
           className="flex group gap-x-2 text-md"
           onClick={handleContactClick}
         >
-          <span className="group-hover:rotate-90 duration-300 text-gray-500">
-            📞
-          </span>
           Contact Us
         </Button>
       </div>
