@@ -58,7 +58,9 @@ const EventSchedule = () => {
             <TableRow>
               <TableHead className="">Event</TableHead>
               <TableHead>Location</TableHead>
-              <TableHead className="text-right">Date & Time</TableHead>
+              <TableHead className="text-right text-right">
+                Date & Time
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
