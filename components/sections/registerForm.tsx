@@ -27,6 +27,8 @@ import { Card, CardContent, CardTitle } from "../ui/card"
 import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { useToast } from "@/hooks/use-toast"
 import { Separator } from "../ui/separator"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 // Zod Schema for TShirtSize Enum
 const TShirtSize = z.enum(["S", "M", "L", "XL", "XXL"])
@@ -65,15 +67,14 @@ const formSchema = z.object({
       tShirtSize: TShirtSize,
     }),
   ]),
-  paymentMethod: paymentMethods,
-  trxId: z
-    .string()
-    .min(10, { message: "Transaction ID must be at least 10 chars long" }),
 })
 
 // ----
 
 const RegisterForm = () => {
+  // Initialize router from Next.js
+  const router = useRouter()
+
   // useForm() hook usage
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -145,36 +146,10 @@ const RegisterForm = () => {
         })
         console.log("Team created: ", result)
 
-        const res = await fetch("/api/sendmail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: data.members[0].email,
-            subject: "Welcome to RDCPC 2024",
-            text: "Thank you for registering for RDCPC 2024!",
-            html: `<h1>Congratulations!</h1>
-        <p>Dear Team Leader,</p>
-        <p>Your team "<strong>${data.teamName}</strong>" has successfully registered for the IUPC event.</p>
-        <p>We're excited to have you with us! Best of luck to your team!</p>
-        <p>Best regards,<br/>IUPC Team</p>`,
-          }),
-        })
-
-        if (res.ok) {
-          toast({
-            title: "Check your mail inbox",
-            description: `An email has been sent to team leader's mail.`,
-          })
-        }
-
-        const d = await res.json()
-        console.log(d)
-
         // Reset form fields
         form.reset()
+
+        router.push(`/payment/${result?._id}`)
       } else {
         // If response is not OK, extract the error message from the response
         const error = await response.json()

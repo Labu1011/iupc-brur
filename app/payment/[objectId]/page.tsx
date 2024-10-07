@@ -1,7 +1,6 @@
 "use client"
 
 import SectionHeader from "@/components/sections/header"
-
 import { useForm } from "react-hook-form"
 import {
   Form,
@@ -23,19 +22,38 @@ import { CardTitle } from "@/components/ui/card"
 import { CheckboxIcon, InfoCircledIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import * as z from "zod"
 import { useEffect, useState } from "react"
+import { toast } from "@/hooks/use-toast"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 type PaymentFormValues = {
   paymentMethod: string
   trxId: string
 }
 
+const paymentFormSchema = z.object({
+  paymentMethod: z
+    .string()
+    .min(1, "Payment method is required") // Ensure it's not empty
+    .refine(
+      (val) => val === "Bkash" || val === "Nagad" || val === "Rocket",
+      "Invalid payment method"
+    ),
+  trxId: z
+    .string()
+    .min(8, "Transaction ID must be at least 8 characters") // Example length validation
+    .nonempty("Transaction ID is required"),
+})
+
 const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
-  // Use useState to manage paymentStatus and loading state
   const [paymentStatus, setPaymentStatus] = useState<boolean | null>(null)
+  const [trxId, setTrxId] = useState<string | null>(null) // New trxId state
+  const [teamId, setTeamId] = useState<number | null>(null) // New teamId state
   const [isLoading, setIsLoading] = useState<boolean>(true) // New loading state
 
   const form = useForm<PaymentFormValues>({
+    resolver: zodResolver(paymentFormSchema),
     defaultValues: {
       paymentMethod: "",
       trxId: "",
@@ -54,8 +72,10 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
           }
         )
         const data = await response.json()
+        console.log("Team data after reg. : ", data)
         setPaymentStatus(data.paymentStatus) // Set paymentStatus state
-        console.log(data.paymentStatus)
+        setTrxId(data.trxId) // Store trxId if available
+        setTeamId(data.teamId)
       } catch (error) {
         console.log(error)
       } finally {
@@ -68,8 +88,72 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
     }
   }, [params.objectId])
 
-  const onSubmit = (values: PaymentFormValues) => {
-    console.log("Payment Form Submitted", values)
+  const onSubmit = async (values: PaymentFormValues) => {
+    const toastId = toast({
+      title: "Submitting...",
+      description: (
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin">
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+          </div>{" "}
+          <span className="sr-only">Loading...</span>
+          {/* Loading spinner */}
+          <span>Sending payment info, please wait...</span>
+        </div>
+      ),
+    })
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-registration/payment/${params.objectId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            trxId: values.trxId,
+            paymentMethod: values.paymentMethod,
+          }),
+        }
+      )
+
+      if (response.ok) {
+        const data = await response.json()
+        setPaymentStatus(data.paymentStatus) // Update the payment status in UI
+        setTrxId(data.trxId) // Update trxId in the state
+
+        // Trigger success toast
+        toast({
+          title: "✅ Payment Information Sent",
+          description:
+            "Your payment information has been sent successfully. We will process it soon.",
+        })
+
+        form.reset()
+
+        console.log("Payment information updated successfully:", data)
+      } else {
+        console.error("❌ Failed to update payment information")
+      }
+    } catch (error) {
+      console.error("Error submitting payment information:", error)
+    }
   }
 
   return (
@@ -89,8 +173,9 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
         </p>
       ) : (
         <>
-          {/* Conditionally render based on paymentStatus */}
+          {/* Conditionally render based on paymentStatus and trxId */}
           {paymentStatus === true ? (
+            // Completed Status
             <>
               <CheckboxIcon className="text-green-500 w-12 h-12 mx-auto" />
               <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
@@ -101,10 +186,24 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                 registered.
               </p>
             </>
-          ) : paymentStatus === false || paymentStatus === null ? (
+          ) : trxId && paymentStatus === false ? (
+            // Processing Status
+            <>
+              <InfoCircledIcon className="text-yellow-500 w-12 h-12 mx-auto" />
+              <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
+                Payment is being processed
+              </h1>
+              <p className="text-zinc-400 text-center mt-2">
+                We've received your transaction ID. Please wait while we verify
+                your payment.
+              </p>
+            </>
+          ) : (
+            // Pending Status (No trxId)
             <>
               <SectionHeader title="Payment Verification" subtitle={<></>} />
               <div className="max-w-md mx-auto p-6">
+                <p className="text-zinc-200 pb-8">Reference: {teamId}</p>
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -167,10 +266,6 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                 </Link>
               </div>
             </>
-          ) : (
-            <p className="text-red-500 text-center">
-              Failed to retrieve payment status
-            </p>
           )}
         </>
       )}

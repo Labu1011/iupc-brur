@@ -2,6 +2,14 @@
 
 import { cn } from "@/app/lib/cn"
 import { geist } from "@/app/lib/font"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardTitle } from "@/components/ui/card"
+import { useToast } from "@/hooks/use-toast"
+import Cookies from "js-cookie" // Import js-cookie for cookie management
 import {
   Form,
   FormControl,
@@ -10,13 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import * as z from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardTitle } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
 
 // Zod Schema for Login Form
 const formSchema = z.object({
@@ -48,7 +49,7 @@ const LoginForm = () => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,8 +59,11 @@ const LoginForm = () => {
 
       if (response.ok) {
         const result = await response.json()
+        console.log(result)
 
-        // Show success toast
+        // Store the token in cookies
+        Cookies.set("authToken", result.access_token, { expires: 1 }) // Store token for 7 days
+
         toast({
           title: "✅ Success!",
           description: `Welcome back, ${result.username}!`,
@@ -68,6 +72,8 @@ const LoginForm = () => {
 
         // Reset form fields
         form.reset()
+
+        window.location.href = "/b48ff5fe15" // Example route
       } else {
         const error = await response.json()
         toast({

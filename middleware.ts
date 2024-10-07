@@ -1,14 +1,13 @@
 // middleware.ts
 import { NextRequest, NextResponse } from "next/server"
+import Cookies from "js-cookie"
 
 // Define the routes that need to be protected
-const protectedRoutes = ["/g"]
+const protectedRoutes = ["/b48ff5fe15"]
 
 export function middleware(request: NextRequest) {
-  // Get the user's token from cookies (you can adjust this logic based on your auth method)
-  const token = request.cookies.get("token")?.value
+  const token = Cookies.get("access_token")
 
-  // Clone the URL
   const url = request.nextUrl.clone()
 
   // Check if the request is for a protected route

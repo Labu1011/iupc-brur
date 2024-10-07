@@ -27,6 +27,7 @@
     "embla-carousel-autoplay": "^8.2.0",
     "embla-carousel-react": "^8.2.0",
     "framer-motion": "^11.3.30",
+    "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "nodemailer": "^6.9.15",
     "react": "^18",
@@ -41,6 +42,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.16",
     "@types/react": "^18",
