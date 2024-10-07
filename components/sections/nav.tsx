@@ -16,7 +16,12 @@ const Nav = () => {
   }
   return (
     <div className="container py-7 relative z-[1000] flex items-center justify-between w-full">
-      <Image src="/mongram.png" width={100} height={0} alt="" />
+      <Image
+        src="/mongram.png"
+        width={100}
+        height={0}
+        alt="BRUR CSE FEST Logo"
+      />
       <div
         className={cn(
           geist.className,
