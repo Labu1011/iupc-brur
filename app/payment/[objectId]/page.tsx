@@ -236,8 +236,8 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                     title="Payment Verification"
                     subtitle={<></>}
                   />
-                  <div className="max-w-5xl mx-auto p-6 flex gap-12">
-                    <div className="w-1/2">
+                  <div className="max-w-5xl mx-auto p-6 flex flex-col lg:flex-row gap-12">
+                    <div className="w-full lg:w-1/2">
                       <Form {...form}>
                         <form
                           onSubmit={form.handleSubmit(onSubmit)}
@@ -308,7 +308,7 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                       </Link>
                     </div>
 
-                    <div className="w-1/2">
+                    <div className="w-full lg:w-1/2 order-first lg:order-last">
                       <Card className="relative text-white border-gray-400/40">
                         <QR_Info
                           method={form.watch("paymentMethod")}
