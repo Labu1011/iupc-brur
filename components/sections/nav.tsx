@@ -33,13 +33,19 @@ const Nav = () => {
         <Link href="#services">Prizes & Perks</Link>
         <Link href="/registeredTeam">Registered Teams</Link>
       </div>
-      <div className="flex items-center justify-center gap-3">
+      <div className="flex flex-col gap-3">
         <Button
           className="flex group gap-x-2 text-md"
           onClick={handleContactClick}
         >
           Contact Us
         </Button>
+        <Link
+          href="/registeredTeam"
+          className="lg:hidden px-4 py-2 rounded-2xl bg-zinc-500/50 text-white"
+        >
+          Registered Teams
+        </Link>
       </div>
     </div>
   )
