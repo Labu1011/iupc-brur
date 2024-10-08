@@ -29,7 +29,7 @@ const Nav = () => {
         )}
       >
         <Link href="/">Home</Link>
-        <Link href="#showcases">Event Schedule</Link>
+        <Link href="#events">Event Schedule</Link>
         <Link href="#services">Prizes & Perks</Link>
         <Link href="/registeredTeam">Registered Teams</Link>
       </div>

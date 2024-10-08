@@ -44,6 +44,7 @@ const schedule: Schedule[] = [
 const EventSchedule = () => {
   return (
     <div
+      id="events"
       className={cn(
         fregeist.className,
         "relative container space-y-3 bg-black text-white w-full"
