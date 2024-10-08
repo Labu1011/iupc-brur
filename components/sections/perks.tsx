@@ -16,7 +16,7 @@ const Perks = () => {
           title="Participants' perks"
           subtitle={
             <>
-              As a token of appreciation for being part of the IUPC,{" "}
+              As a token of appreciation for being part of the RDCPC,{" "}
               <br className="hidden lg:block" /> every participant will enjoy a
               range of exclusive perks.
             </>
@@ -30,7 +30,7 @@ const Perks = () => {
           <div className="flex border border-zinc-100/20 rounded-2xl px-6 py-4 md:px-10 md:py-8 items-center gap-4">
             <Image src={"/shirt.png"} height={0} width={110} alt="T-Shirt" />
             <p className="text-zinc-300 text-center text-md lg:text-xl">
-              Official IUPC T-Shirt
+              Official RDCPC T-Shirt
             </p>
           </div>
           <div className="flex border border-zinc-100/20 rounded-2xl px-6 py-4 md:px-10 md:py-8 items-center gap-4">
@@ -61,7 +61,7 @@ const Perks = () => {
         >
           *
         </span>
-        And enjoy complimentary snacks during the IUPC event to keep you{" "}
+        And enjoy complimentary snacks during the RDCPC event to keep you{" "}
         <br className="hidden lg:block" />
         energized and focused throughout the competition!
       </p>

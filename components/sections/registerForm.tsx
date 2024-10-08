@@ -276,9 +276,12 @@ const RegisterForm = () => {
                               : "hidden"
                           )}
                         >
-                          <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
+                          <div className="flex flex-col gap-2 leading-none text-muted-foreground">
                             <InfoCircledIcon className="w-4 h-4" /> Member 1
-                            will be considered team leader
+                            will be considered as team leader <br />
+                            <p>
+                              We will send all mail to this member&apos;s email
+                            </p>
                           </div>
                         </CardTitle>
                         <div className="h-1"></div>

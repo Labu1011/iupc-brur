@@ -11,7 +11,7 @@ const CountdownSection = () => {
     <div
       className={clsx(
         fregeist.className,
-        " bg-zinc-900 w-96 space-y-0 px-8 py-6 rounded-3xl mt-44"
+        " bg-zinc-900 w-96 space-y-0 px-8 py-6 rounded-3xl mt-44 z-50"
       )}
     >
       <p className="text-2xl py-2 text-zinc-500 text-center">
