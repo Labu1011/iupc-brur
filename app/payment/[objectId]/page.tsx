@@ -80,10 +80,25 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
           }
         )
         const data = await response.json()
-        console.log("Team data after reg. : ", data)
-        setPaymentStatus(data.paymentStatus) // Set paymentStatus state
-        setTrxId(data.trxId) // Store trxId if available
-        setTeamId(data.teamId)
+        console.log("Team data after reg. : ", data.statusCode)
+
+        if (data.statusCode === 404) {
+          // Show toast for team not found
+          toast({
+            title: "Team Not Found",
+            description:
+              "The team with this ID does not exist. Please register first.",
+            variant: "destructive", // To show it's an error or issue
+          })
+
+          setPaymentStatus(null)
+          setTrxId(null)
+          setTeamId(null)
+        } else {
+          setPaymentStatus(data.paymentStatus) // Set paymentStatus state
+          setTrxId(data.trxId) // Store trxId if available
+          setTeamId(data.teamId)
+        }
       } catch (error) {
         console.log(error)
       } finally {
@@ -181,108 +196,126 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
         </p>
       ) : (
         <>
-          {/* Conditionally render based on paymentStatus and trxId */}
-          {paymentStatus === true ? (
-            // Completed Status
-            <>
-              <CheckboxIcon className="text-green-500 w-12 h-12 mx-auto" />
-              <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
-                Payment Verification Complete!
-              </h1>
-              <p className="text-zinc-400 text-center mt-2">
-                Thanks for making the payment. Your team has successfully been
-                registered.
-              </p>
-            </>
-          ) : trxId && paymentStatus === false ? (
-            // Processing Status
-            <>
-              <InfoCircledIcon className="text-yellow-500 w-12 h-12 mx-auto" />
-              <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
-                Payment is being processed
-              </h1>
-              <p className="text-zinc-400 text-center mt-2">
-                We&apos;ve received your transaction ID. Please wait while we
-                verify your payment. <br /> We will notify you through a
-                confirmation email.
-              </p>
-            </>
+          {/* If the team is not found (statusCode 404) */}
+          {paymentStatus === null ? (
+            <p className="text-center text-lg text-red-400">
+              Team not found with this ID. Please register first.
+            </p>
           ) : (
-            // Pending Status (No trxId)
             <>
-              <SectionHeader title="Payment Verification" subtitle={<></>} />
-              <div className="max-w-5xl mx-auto p-6 flex gap-12">
-                <div className="w-1/2">
-                  <Form {...form}>
-                    <form
-                      onSubmit={form.handleSubmit(onSubmit)}
-                      className="space-y-4 max-w-md"
-                    >
-                      {/* Payment Method Selector */}
-                      <FormField
-                        control={form.control}
-                        name="paymentMethod"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Payment Method</FormLabel>
-                            <FormControl>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select payment method" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="Bkash">Bkash</SelectItem>
-                                  <SelectItem value="Nagad">Nagad</SelectItem>
-                                  <SelectItem value="Rocket">Rocket</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      {/* Transaction ID Input */}
-                      <FormField
-                        control={form.control}
-                        name="trxId"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Transaction ID</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="text"
-                                placeholder="Enter transaction ID"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <div>{form.getValues("paymentMethod")}</div>
-                      {/* Submit Button */}
-                      <Button type="submit">Submit</Button>
-                    </form>
-                  </Form>
+              {/* Conditionally render based on paymentStatus and trxId */}
+              {paymentStatus === true ? (
+                // Completed Status
+                <>
+                  <CheckboxIcon className="text-green-500 w-12 h-12 mx-auto" />
+                  <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
+                    Payment Verification Complete!
+                  </h1>
+                  <p className="text-zinc-400 text-center mt-2">
+                    Thanks for making the payment. Your team has successfully
+                    been registered.
+                  </p>
+                </>
+              ) : trxId && paymentStatus === false ? (
+                // Processing Status
+                <>
+                  <InfoCircledIcon className="text-yellow-500 w-12 h-12 mx-auto" />
+                  <h1 className="text-5xl text-center mt-8 font-bold text-zinc-100">
+                    Payment is being processed
+                  </h1>
+                  <p className="text-zinc-400 text-center mt-2">
+                    We&apos;ve received your transaction ID. Please wait while
+                    we verify your payment. <br /> We will notify you through a
+                    confirmation email.
+                  </p>
+                </>
+              ) : (
+                // Pending Status (No trxId)
+                <>
+                  <SectionHeader
+                    title="Payment Verification"
+                    subtitle={<></>}
+                  />
+                  <div className="max-w-5xl mx-auto p-6 flex gap-12">
+                    <div className="w-1/2">
+                      <Form {...form}>
+                        <form
+                          onSubmit={form.handleSubmit(onSubmit)}
+                          className="space-y-4 max-w-md"
+                        >
+                          {/* Payment Method Selector */}
+                          <FormField
+                            control={form.control}
+                            name="paymentMethod"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Payment Method</FormLabel>
+                                <FormControl>
+                                  <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                  >
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Select payment method" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="Bkash">
+                                        Bkash
+                                      </SelectItem>
+                                      <SelectItem value="Nagad">
+                                        Nagad
+                                      </SelectItem>
+                                      <SelectItem value="Rocket">
+                                        Rocket
+                                      </SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          {/* Transaction ID Input */}
+                          <FormField
+                            control={form.control}
+                            name="trxId"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Transaction ID</FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="text"
+                                    placeholder="Enter transaction ID"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div>{form.getValues("paymentMethod")}</div>
+                          {/* Submit Button */}
+                          <Button type="submit">Submit</Button>
+                        </form>
+                      </Form>
 
-                  <p className="mt-4 text-zinc-500">or</p>
-                  <Link href="/" className="text-zinc-300 underline mt-2">
-                    Pay Later
-                  </Link>
-                </div>
+                      <p className="mt-4 text-zinc-500">or</p>
+                      <Link href="/" className="text-zinc-300 underline mt-2">
+                        Pay Later
+                      </Link>
+                    </div>
 
-                <div className="w-1/2">
-                  <Card className="relative text-white border-gray-400/40">
-                    <QR_Info
-                      method={form.watch("paymentMethod")}
-                      teamId={teamId}
-                    />
-                  </Card>
-                </div>
-              </div>
+                    <div className="w-1/2">
+                      <Card className="relative text-white border-gray-400/40">
+                        <QR_Info
+                          method={form.watch("paymentMethod")}
+                          teamId={teamId}
+                        />
+                      </Card>
+                    </div>
+                  </div>
+                </>
+              )}
             </>
           )}
         </>

@@ -12,7 +12,7 @@ import Menu from "./menu"
 const Nav = () => {
   const handleContactClick = () => {
     window.location.href =
-      "mailto:example@email.com?subject=Contact%20Us&body=Hello!"
+      "mailto:rdcpcofficial@gmail.com?subject=Your subject%20Us&body=Hello!"
   }
   return (
     <div className="container py-7 relative z-[1000] flex items-center justify-between w-full">

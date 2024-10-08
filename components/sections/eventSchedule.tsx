@@ -29,8 +29,16 @@ const schedule: Schedule[] = [
     location: "Online",
     dateTime: "12 Oct, 2024",
   },
-  { event_: "Mock Contest", location: "BRUR", dateTime: "18 Oct, 2024" },
-  { event_: "Main Contest", location: "BRUR", dateTime: "19 Oct, 2024" },
+  {
+    event_: "Mock Contest",
+    location: "BRUR",
+    dateTime: "18 Oct, 2024, 4:00 PM",
+  },
+  {
+    event_: "Main Contest",
+    location: "BRUR",
+    dateTime: "19 Oct, 2024, 9:00 AM",
+  },
 ]
 
 const EventSchedule = () => {
