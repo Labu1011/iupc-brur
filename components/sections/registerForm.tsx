@@ -181,7 +181,7 @@ const RegisterForm = () => {
       <SectionHeader
         title={
           <>
-            <span className="text-white opacity-30">{"final"}</span>{" "}
+            <span className="text-white opacity-30">{"Final"}</span>{" "}
             <span>Registration</span>
             {/* <span className="text-white opacity-30">{""}</span> */}
           </>
@@ -204,21 +204,19 @@ const RegisterForm = () => {
               <div className="space-y-2">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white">
+                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-400 text-zinc-800">
                       1
                     </div>
-                    <span className="ml-2 text-zinc-400">
-                      Final Registration
-                    </span>
+                    <span className="ml-2 text-muted">Final Registration</span>
                   </div>
 
                   <div className="w-8 border-t border-zinc-400"></div>
 
                   <div className="flex items-center">
-                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-400 text-white">
+                    <div className="w-8 h-8 flex items-center justify-center border border-zinc-600 rounded-full text-white">
                       2
                     </div>
-                    <span className="ml-2 text-zinc-400">Payment</span>
+                    <span className="ml-2 text-muted">Payment</span>
                   </div>
                 </div>
 
@@ -392,11 +390,10 @@ const RegisterForm = () => {
                     </>
                   ))}
                 </div>
-                <div className="pt-8 flex gap-2 leading-snug items-baseline text-amber-300/90">
+                <div className="pt-8 flex gap-2 leading-snug items-baseline text-sm text-amber-300/90">
                   <InfoCircledIcon className="w-4 h-4" /> After submitting this
-                  form, you will be redirected to the payment page. <br /> But
-                  you can pay later with that link{" "}
-                  {"(Each team has a specific link)"}.
+                  form, you will be redirected to the payment page. But you can
+                  pay later with that link {"(Each team has a specific link)"}.
                 </div>
               </div>
 
