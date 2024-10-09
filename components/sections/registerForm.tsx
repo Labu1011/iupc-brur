@@ -181,15 +181,15 @@ const RegisterForm = () => {
       <SectionHeader
         title={
           <>
-            <span className="text-white opacity-30">{"new"}</span>{" "}
+            <span className="text-white opacity-30">{"final"}</span>{" "}
             <span>Registration</span>
-            <span className="text-white opacity-30">{".create()"}</span>
+            {/* <span className="text-white opacity-30">{""}</span> */}
           </>
         }
         subtitle={
           <>
-            Ready to compete? Register now and <br /> prepare for an
-            unforgettable experience!
+            This is mandatory for all teams, even if you pre-registered. <br />
+            Don&apos;t miss the chance to compete and claim your slot!
           </>
         }
       />
@@ -202,6 +202,26 @@ const RegisterForm = () => {
               className="max-w-[768px] bg-black mx-auto space-y-14  border border-gray-600/30 rounded-3xl shadow-3xl p-7 lg:p-14"
             >
               <div className="space-y-2">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white">
+                      1
+                    </div>
+                    <span className="ml-2 text-zinc-400">
+                      Final Registration
+                    </span>
+                  </div>
+
+                  <div className="w-8 border-t border-zinc-400"></div>
+
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-400 text-white">
+                      2
+                    </div>
+                    <span className="ml-2 text-zinc-400">Payment</span>
+                  </div>
+                </div>
+
                 <CardTitle className="text-lg">Basic Information</CardTitle>
                 <CardTitle className="flex-col items-start gap-2 text-sm">
                   <div className="flex items-center gap-x-2 leading-none text-muted-foreground">
@@ -372,12 +392,18 @@ const RegisterForm = () => {
                     </>
                   ))}
                 </div>
+                <div className="pt-8 flex gap-2 leading-snug items-baseline text-amber-300/90">
+                  <InfoCircledIcon className="w-4 h-4" /> After submitting this
+                  form, you will be redirected to the payment page. <br /> But
+                  you can pay later with that link{" "}
+                  {"(Each team has a specific link)"}.
+                </div>
               </div>
 
               {/* Payment Verification */}
 
               {/* Submit Button */}
-              <Button type="submit" size="lg" className="max-w-36">
+              <Button type="submit" size="lg" className="max-w-36 text-sm">
                 Submit
               </Button>
             </form>
