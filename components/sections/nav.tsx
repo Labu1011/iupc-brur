@@ -32,6 +32,10 @@ const Nav = () => {
         <Link href="#events">Event Schedule</Link>
         <Link href="#services">Prizes & Perks</Link>
         <Link href="/registeredTeam">Registered Teams</Link>
+        <div className="relative">
+          <Link href="#rulebook">Rulebook</Link>
+          <span className="absolute top-[1px] right-[70px] bg-yellow-500 w-2 h-2 rounded-full"></span>
+        </div>
       </div>
       <div className="flex flex-col gap-3">
         <Button
