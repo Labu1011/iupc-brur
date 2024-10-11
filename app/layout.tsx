@@ -9,8 +9,9 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "BRUR CSE Fest IUPC",
-  description: "",
+  title: "BRUR CSE Fest RDCPC 2024",
+  description:
+    "Join us for the BRUR CSE Fest RDCPC 2024, a thrilling competitive programming contest bringing together talented coders to compete, collaborate, and showcase their problem-solving skills. Final registration and payment details available now.",
 }
 
 export default function RootLayout({
