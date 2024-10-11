@@ -7,6 +7,7 @@ import Nav from "@/components/sections/nav"
 import Perks from "@/components/sections/perks"
 import PrizePool from "@/components/sections/prizepool"
 import RegisterForm from "@/components/sections/registerForm"
+import Rulebook from "@/components/sections/rulebook"
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       <PrizePool />
       <Perks />
       <RegisterForm />
+      <Rulebook />
       <GoogleMapEmbed />
       <Footer />
     </main>
