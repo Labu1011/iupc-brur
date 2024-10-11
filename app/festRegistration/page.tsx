@@ -16,7 +16,9 @@ async function FestRegistrationPage() {
 			</Link>
 			<div className="mt-12"/>
 			<SectionHeader title="BRUR CSE FEST 2024 Registration" subtitle={<></>}/>
-			
+			<p className="text-lg md:text-2xl text-center text-gray-400 font-regular">
+				Only for Department of CSE, Begum Rokeya University, Rangpur
+			</p>
 			<FestRegisterForm/>
 		</div>
 	)
