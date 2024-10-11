@@ -10,6 +10,7 @@ export default function Home() {
 			<Head>
 				{/* Basic Meta Tags */}
 				<title>BRUR CSE FEST 2024</title>
+				<link rel="icon" href="/favicon.ico" sizes="any"/>
 				<meta name="description"
 					  content="A tech fest by the Dept. of Computer Science at Begum Rokeya University, connecting students with pros to showcase skills, foster innovation, and enhance CS knowledge."/>
 				<meta name="author" content="BRUR CSE FEST 2024"/>
@@ -22,7 +23,8 @@ export default function Home() {
 				<meta property="og:title" content="BRUR CSE FEST 2024"/>
 				<meta property="og:description"
 					  content="A tech fest by the Dept. of Computer Science at Begum Rokeya University, connecting students with pros to showcase skills, foster innovation, and enhance CS knowledge."/>
-				<meta property="og:image" content="https://fest.csebrur.com/_next/image?url=%2Fmongram.png&w=256&q=100"/>
+				<meta property="og:image"
+					  content="https://fest.csebrur.com/_next/image?url=%2Fmongram.png&w=256&q=100"/>
 				<meta property="og:url" content="https://fest.csebrur.com"/>
 				<meta property="og:type" content="website"/>
 				<meta property="og:locale" content="en_US"/>
@@ -32,7 +34,8 @@ export default function Home() {
 				<meta name="twitter:title" content="BRUR CSE FEST 2024"/>
 				<meta name="twitter:description"
 					  content="A tech fest by the Dept. of Computer Science at Begum Rokeya University, connecting students with pros to showcase skills, foster innovation, and enhance CS knowledge."/>
-				<meta name="twitter:image" content="https://fest.csebrur.com/_next/image?url=%2Fmongram.png&w=256&q=100"/>
+				<meta name="twitter:image"
+					  content="https://fest.csebrur.com/_next/image?url=%2Fmongram.png&w=256&q=100"/>
 				<meta name="twitter:site" content="@your_twitter_handle"/>
 				<meta name="twitter:creator" content="@creator_twitter_handle"/>
 				
