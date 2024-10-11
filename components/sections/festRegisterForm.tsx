@@ -7,7 +7,7 @@ const Footer = () => {
 			{/*	<iframe src="http://localhost:4200" width={600} height={930}></iframe>*/}
 			{/*</div>*/}
 			<div className="i-container">
-				<iframe className="responsive-iframe w-screen"  height={1100} src="https://sparkling-speculoos-133cff.netlify.app/"></iframe>
+				<iframe className="responsive-iframe w-screen"  height={1400} src="https://sparkling-speculoos-133cff.netlify.app/"></iframe>
 			</div>
 		</div>
 	)
