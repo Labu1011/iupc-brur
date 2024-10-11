@@ -6,10 +6,6 @@ import Image from "next/image"
 import React from "react"
 
 const FestNav = () => {
-	const handleContactClick = () => {
-		window.location.href =
-			"mailto:rdcpcofficial@gmail.com?subject=Your subject%20Us&body=Hello!"
-	}
 	return (
 		<div className="container py-7 relative z-[1000] flex items-center justify-between max-w-5xl">
 			<Image
