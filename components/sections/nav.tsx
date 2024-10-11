@@ -12,7 +12,7 @@ import Menu from "./menu"
 const Nav = () => {
   const handleContactClick = () => {
     window.location.href =
-      "mailto:rdcpcofficial@gmail.com?subject=Your subject%20Us&body=Hello!"
+      "mailto:rdcpcofficial@gmail.com?subject=Your subject&body=Hello RDCPC Team, I need help with..."
   }
   return (
     <div className="container py-7 relative z-[1000] flex items-center justify-between w-full">
@@ -32,6 +32,10 @@ const Nav = () => {
         <Link href="#events">Event Schedule</Link>
         <Link href="#services">Prizes & Perks</Link>
         <Link href="/registeredTeam">Registered Teams</Link>
+        <div className="relative">
+          <Link href="#rulebook">Rulebook</Link>
+          <span className="absolute top-[1px] right-[70px] bg-yellow-500 w-2 h-2 rounded-full"></span>
+        </div>
       </div>
       <div className="flex flex-col gap-3">
         <Button

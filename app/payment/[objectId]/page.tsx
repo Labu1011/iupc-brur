@@ -293,7 +293,7 @@ const TeamPaymentPage = ({ params }: { params: { objectId: string } }) => {
                               </FormItem>
                             )}
                           />
-                          <div>{form.getValues("paymentMethod")}</div>
+
                           {/* Submit Button */}
                           <Button type="submit">Submit</Button>
                         </form>
