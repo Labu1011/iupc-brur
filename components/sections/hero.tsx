@@ -32,14 +32,14 @@ const Hero = () => {
         </p>
         <div className="h-0"></div>
 
-        <a href="#register">
+        <Link href="/registeredTeam">
           <Button
             size={"lg"}
             className="mx-auto w-fit text-md h-12 px-12 flex group gap-x-2"
           >
-            Register your team
+            View All Teams
           </Button>
-        </a>
+        </Link>
       </div>
 
       {/* <Link */}
