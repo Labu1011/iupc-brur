@@ -2,7 +2,6 @@ import React from "react"
 import {cn} from "@/app/lib/cn"
 import {geist} from "@/app/lib/font"
 import {Button} from "@/components/ui/button"
-import FestCountdownSection from "@/components/sections/festCountdown";
 
 const FestHero = () => {
 	return (
@@ -23,9 +22,9 @@ const FestHero = () => {
 				<p className="text-lg md:text-2xl text-center text-gray-400 font-regular">
 					Organized by Department of CSE, BRUR and CSE CLUB
 				</p>
-				<div className="mx-auto flex justify-center">
-					<FestCountdownSection/>
-				</div>
+				{/*<div className="mx-auto flex justify-center">*/}
+				{/*	<FestCountdownSection/>*/}
+				{/*</div>*/}
 				<div className="h-0"></div>
 				
 				<a href="/rdcpc" className="w-72 mx-auto">
