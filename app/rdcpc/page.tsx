@@ -24,6 +24,7 @@ export default function Home() {
       </div>
       <Nav />
       <Hero />
+      
       <CountdownSection />
       <EventSchedule />
       <PrizePool />
