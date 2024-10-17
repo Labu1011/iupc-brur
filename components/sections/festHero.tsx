@@ -37,14 +37,14 @@ const FestHero = () => {
 					</Button>
 				</a>
 				
-				<a href="/festRegistration" className="w-72 mx-auto">
-					<Button
-						size={"lg"}
-						className="mx-auto w-full text-md h-12 px-12 flex group gap-x-2"
-					>
-						Register for BRUR CSE FEST 2024
-					</Button>
-				</a>
+				{/*<a href="/festRegistration" className="w-72 mx-auto">*/}
+				{/*	<Button*/}
+				{/*		size={"lg"}*/}
+				{/*		className="mx-auto w-full text-md h-12 px-12 flex group gap-x-2"*/}
+				{/*	>*/}
+				{/*		Register for BRUR CSE FEST 2024*/}
+				{/*	</Button>*/}
+				{/*</a>*/}
 			</div>
 			{/* <Link */}
 			{/*   href="#services" */}
